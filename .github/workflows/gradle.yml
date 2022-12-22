@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         java-versions: ['8','11','17']
-        os: [windows-latest]
+        os: [windows-latest,ubuntu-latest,macos-latest]
     runs-on: ${{matrix.os}}
     
     steps:
@@ -31,6 +31,8 @@ jobs:
       with:
         java-version: ${{matrix.java-versions}}
         distribution: 'temurin'
+    -name: Run chmod to make gradlew executable
+      run: chmod +x ./gradlew
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
